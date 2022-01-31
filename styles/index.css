@@ -1,0 +1,110 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10%;
+  height: 64px;
+  width: 100vw;
+  backdrop-filter: blur(4px);
+  z-index: 9;
+  transition: transform cubic-bezier(0.25, 1, 0.5, 1) 1s;
+
+  font-size: 4.2rem;
+  font-weight: bold;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 30px;
+  padding: 0 10% 60px 10%;
+  margin-top: calc(64px + 60px);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 1.28;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--color-card-background);
+  overflow: hidden;
+  transition: box-shadow linear 0.5s;
+}
+
+.card:hover {
+  box-shadow: 4px 4px 26px 2px rgba(0, 0, 0, 0.25);
+}
+
+.card-gradient-preview {
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.card-footer span {
+  flex: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.card-footer span + span {
+  flex: 3;
+  text-align: right;
+}
+
+.card > button {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  box-shadow: 0px -4px 26px -4px rgba(0, 0, 0, 0.25);
+  background-color: rgba(var(--color-card-background), 0.2);
+  backdrop-filter: blur(4px);
+  font-size: 1.8rem;
+  font-weight: medium;
+  cursor: pointer;
+  transition: transform cubic-bezier(0.25, 1, 0.5, 1) 1s;
+  outline: none;
+  border: none;
+}
+
+.card:hover > button {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 425px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
