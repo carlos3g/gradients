@@ -1,5 +1,11 @@
 const mainTag = document.getElementsByTagName("main")[0];
 const gradients = [
+  { colors: ["#380152", "#9903E3"], angle: 45 },
+  { colors: ["#000000", "#0A1852"], angle: 45 },
+  { colors: ["#4158D0", "#C850C0", "#FFCC70"], angle: 45 },
+  { colors: ["#08AEEA", "#2AF598"], angle: 45 },
+  { colors: ["#03001E", "#7303C0", "#EC38BC"], angle: 45 },
+  { colors: ["#330867", "#30CFD0"], angle: 45 },
   { colors: ["#610bfc", "#ff37cc"], angle: 95 },
   { colors: ["#D9A0FF", "#81D8FF", "#94F1ED"], angle: 45 },
   { colors: ["#C29FFD", "#FFB4DC", "#FEF0D1"], angle: 45 },
