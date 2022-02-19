@@ -1,4 +1,4 @@
-const mainTag = document.getElementsByTagName("main")[0];
+const gradientsContainer = document.getElementById("gradients");
 const gradients = [
   { colors: ["#90218c", "#009b90"], angle: 135 },
   { colors: ["#00abee", "#f8f8ba"], angle: 135 },
@@ -27,9 +27,6 @@ const gradients = [
   { colors: ["#FF8E47", "#FF2CED"], angle: 128 },
   { colors: ["#FFC3F0", "#FDF784"], angle: 128 },
 ];
-
-mainTag.innerHTML = renderGradients(gradients);
-document.addEventListener("scroll", checksHeader);
 
 function renderGradient(data) {
   const { colors, angle } = data;
@@ -84,3 +81,6 @@ function checksHeader() {
 
   prevY = currY;
 }
+
+gradientsContainer.innerHTML = renderGradients(gradients);
+document.addEventListener("scroll", checksHeader);
