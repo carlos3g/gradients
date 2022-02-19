@@ -30,23 +30,29 @@ const gradients = [
 
 function renderGradient(data) {
   const { colors, angle } = data;
-  const previewStyle = `background: linear-gradient(${angle}deg, ${colors.join(
-    ","
-  )})`;
+  const gradient = `linear-gradient(${angle}deg, ${colors.join(",")})`;
+  const html = `
+  <div class="card">
+    <div class="card-gradient-preview" style="background: ${gradient};"></div>
+    <div class="card-footer">
+      <span>${angle}°</span><span>${colors.join(" ✗ ")}</span>
+    </div>
+    <button onclick="copyGradient(this)">Copy</button>
+  </div>
+  `;
 
-  return `
-<div class="card" style="color: red;">
-<div class="card-gradient-preview" style="${previewStyle}"></div>
-<div class="card-footer">
-  <span>${angle}°</span><span>${colors.join(" ✗ ")}</span>
-</div>
-<button onclick="copyGradient(this)">Copy</button>
-</div>
-`;
+  return html;
 }
 
 function renderGradients(gradients) {
   return gradients.map(renderGradient).join(" ");
+}
+
+function copyGradient(button) {
+  const gradientPreview = button.parentElement.firstElementChild;
+  const styles = window.getComputedStyle(gradientPreview);
+  const bgImage = styles.backgroundImage;
+  navigator.clipboard.writeText(bgImage);
 }
 
 function setHeaderVisibility(value) {
@@ -61,26 +67,21 @@ function setHeaderVisibility(value) {
   header.style.transform = "translateY(0)";
 }
 
-function copyGradient(button) {
-  const gradientPreview = button.parentElement.firstElementChild;
-  const gradientPreviewBackground =
-    window.getComputedStyle(gradientPreview).backgroundImage;
-  navigator.clipboard.writeText(gradientPreviewBackground);
-}
-
-let prevY = window.scrollY;
-
 function checksHeader() {
-  const currY = window.scrollY;
+  let prevY = window.scrollY;
 
-  if (currY < prevY) {
-    setHeaderVisibility(true);
-  } else if (currY > prevY) {
-    setHeaderVisibility(false);
-  }
+  return () => {
+    const currY = window.scrollY;
 
-  prevY = currY;
+    if (currY < prevY) {
+      setHeaderVisibility(true);
+    } else if (currY > prevY) {
+      setHeaderVisibility(false);
+    }
+
+    prevY = currY;
+  };
 }
 
 gradientsContainer.innerHTML = renderGradients(gradients);
-document.addEventListener("scroll", checksHeader);
+document.addEventListener("scroll", checksHeader());
